@@ -75,6 +75,8 @@ custom:
       - mysql                   # Only necessary if packages are included dynamically
     ignorePackages:           # Ignore building any of the following packages
       - hiredis                 # For ex, hiredis needs to be ignored if using redis
+    webpackDefinitions:       # Add extra definitions to webpack
+      - "global.GENTLY": false  # For ex, global.GENTLY will be false
     copyFiles:                # Copy any additional files to the generated package
       - from: 'public/*'        # Where the files are currently
         to: './'                # Where in the package should they go
@@ -188,6 +190,18 @@ And in `service1/package.json` use this `test` script:
 ```
 
 This tells serverless-bundle (in the root) to only run the tests inside the `service1/` directory. As opposed to the entire project.
+
+### Webpack definitions
+
+If you need to define custom values for your webpack compilation, you
+can add a list of values under `webpackDefinitions`.
+
+```yml
+custom:
+  bundle:
+    webpackDefinitions:
+      - "global.GENTLY" : false
+```
 
 ## Support
 
